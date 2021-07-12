@@ -1,25 +1,14 @@
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
-import { Module } from '@nestjs/common';
-import { EmailController } from './email/email.controller';
-import { RedisModule } from './config/redis.module';
-import { EmailModule } from './email/email.module';
+import { ConfigModule } from "@nestjs/config";
+import { Module } from "@nestjs/common";
+import { EmailController } from "./email/email.controller";
+import { EmailModule } from "./email/email.module";
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot({
-      ttl: 300,
-      limit: 10
-    }),
-    RedisModule,
+    ConfigModule.forRoot(),
     EmailModule
   ],
-  controllers: [EmailController],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard
-    }
-  ]
+  controllers: [EmailController]
 })
-export class AppModule {}
+export class AppModule {
+}
