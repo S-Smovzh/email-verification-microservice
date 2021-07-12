@@ -1,16 +1,17 @@
 import { MessagePattern, Payload, Transport } from "@nestjs/microservices";
 import { Controller, UseFilters } from "@nestjs/common";
-import { InternalExceptionFilter } from "../exceptions/filters/Internal.exception-filter";
+import { ExceptionFilter } from "../exceptions/Exception.filter";
 import { VerifyEmailDto } from "./dto/verify-email.dto";
 import { EmailService } from "./email.service";
 
-@UseFilters(new InternalExceptionFilter())
+@UseFilters(new ExceptionFilter())
 @Controller("email")
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
   @MessagePattern({ cmd: "verify-email" }, Transport.REDIS)
   async validateEmail(@Payload() verifyEmailDto: VerifyEmailDto) {
+    console.log('received');
     return await this.emailService.validateEmail(verifyEmailDto);
   }
   
