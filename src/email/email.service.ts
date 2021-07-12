@@ -1,7 +1,7 @@
-import { Injectable } from "@nestjs/common";
+import { HttpStatus, Injectable } from "@nestjs/common";
+import { RpcException } from "@nestjs/microservices";
 import i18next from "i18next";
-import { GlobalErrorCodes } from "../exceptions/errorCodes/GlobalErrorCodes";
-import { InternalException } from "../exceptions/Internal.exception";
+import { GlobalErrorCodes } from "../exceptions/GlobalErrorCodes";
 import { VerifyEmailDto } from "./dto/verify-email.dto";
 import { MailOptions } from "./interfaces/MailOptions";
 import { emailTemplate } from "./email-template";
@@ -24,7 +24,7 @@ export class EmailService {
   async validateEmail(verifyEmailDto: VerifyEmailDto) {
     try {
       const prefix = verifyEmailDto.mailType === "VERIFY_EMAIL" ? "ver-" : "for-";
-      
+
       const verificationLink = process.env.FRONT_URL.concat(
         `/verification/${Buffer.from(verifyEmailDto.email).toString("base64")}/${Buffer.from(verifyEmailDto.verificationCode).toString(
           "base64"
@@ -45,11 +45,12 @@ export class EmailService {
           console.log(e);
         } else {
           console.log(`Verification email sent to ${verifyEmailDto.email}: ${info.response}`);
+          return HttpStatus.OK;
         }
       });
     } catch (e) {
       console.log(e.stack);
-      throw new InternalException({
+      return new RpcException({
         key: "INTERNAL_ERROR",
         code: GlobalErrorCodes.INTERNAL_ERROR.code,
         message: GlobalErrorCodes.INTERNAL_ERROR.value
@@ -57,7 +58,3 @@ export class EmailService {
     }
   }
 }
-
-const eSer = new EmailService();
-
-eSer.validateEmail({email: "sergiom33033@gmail.com", verificationCode: "Booba", mailType: "VERIFY_EMAIL"});
