@@ -9,9 +9,8 @@ import { EmailService } from "./email.service";
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
-  @MessagePattern({ cmd: "verify-email" }, Transport.REDIS)
+  @MessagePattern({ cmd: "verify" }, Transport.REDIS)
   async validateEmail(@Payload() verifyEmailDto: VerifyEmailDto) {
-    console.log('received');
     return await this.emailService.validateEmail(verifyEmailDto);
   }
   
