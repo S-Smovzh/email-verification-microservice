@@ -1,16 +1,16 @@
 {
   "name": "back",
   "version": "0.0.1",
-  "description": "",
+  "description": "A microservice responsible for sending verification emails when a user wants to sign up, change some primary data (an email, a password, a mobile phone number or a username) or reset the password.",
   "author": "Sergey Smovzh",
   "private": true,
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "copy": "xcopy \"src/locales\" \"dist/locales/\" /F /Y",
-    "build": "nest build && npm run copy && npm run start",
+    "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "node dist/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -34,10 +34,10 @@
     "nodemailer": "^6.6.2",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "@nestjs/cli": "^7.6.0"
   },
   "devDependencies": {
-    "@nestjs/cli": "^7.6.0",
     "@nestjs/schematics": "^7.3.1",
     "@nestjs/testing": "^7.6.17",
     "@types/express": "^4.17.12",
