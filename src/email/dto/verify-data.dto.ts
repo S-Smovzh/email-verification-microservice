@@ -1,6 +1,6 @@
 import { IsDefined, IsEmail, IsNotEmpty, IsString, IsUUID } from "class-validator";
 
-export class VerifyEmailDto {
+export class VerifyDataDto {
   @IsNotEmpty()
   @IsUUID()
   readonly verificationCode: string;
@@ -13,5 +13,11 @@ export class VerifyEmailDto {
   @IsDefined()
   @IsNotEmpty()
   @IsString()
-  readonly mailType: "VERIFY_EMAIL" | "RESET_PASSWORD";
+  readonly mailType:
+    | "VERIFY_EMAIL"
+    | "RESET_PASSWORD"
+    | "VERIFY_EMAIL_CHANGE"
+    | "VERIFY_USERNAME_CHANGE"
+    | "VERIFY_PHONE_CHANGE"
+    | "VERIFY_PASSWORD_CHANGE";
 }

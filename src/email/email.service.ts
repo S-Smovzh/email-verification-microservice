@@ -2,8 +2,8 @@ import { HttpStatus, Injectable } from "@nestjs/common";
 import { RpcException } from "@nestjs/microservices";
 import i18next from "i18next";
 import { GlobalErrorCodes } from "../exceptions/GlobalErrorCodes";
-import { VerifyEmailDto } from "./dto/verify-email.dto";
 import { MailOptions } from "./interfaces/MailOptions";
+import { VerifyDataDto } from "./dto/verify-data.dto";
 import { emailTemplate } from "./email-template";
 
 const nodemailer = require("nodemailer");
@@ -21,30 +21,62 @@ export class EmailService {
     }
   });
 
-  async validateEmail(verifyEmailDto: VerifyEmailDto) {
+  async validateEmail(verifyDatDto: VerifyDataDto) {
     try {
-      const prefix = verifyEmailDto.mailType === "VERIFY_EMAIL" ? "ver-" : "for-";
+      let type: "reset_password" | "verify_email" | "email" | "password" | "username" | "phone" | "", verificationLink: string;
+      const prefix = verifyDatDto.mailType === "VERIFY_EMAIL" ? "ver-" : "for-";
 
-      const verificationLink = process.env.FRONT_URL.concat(
-        `/verification/${Buffer.from(verifyEmailDto.email).toString("base64")}/${Buffer.from(verifyEmailDto.verificationCode).toString(
-          "base64"
-        )}`
-      );
+      switch (verifyDatDto.mailType) {
+        case "RESET_PASSWORD":
+          type = "reset_password";
+          break;
+        case "VERIFY_EMAIL":
+          type = "verify_email";
+          break;
+        case "VERIFY_EMAIL_CHANGE":
+          type = "email";
+          break;
+        case "VERIFY_PASSWORD_CHANGE":
+          type = "password";
+          break;
+        case "VERIFY_USERNAME_CHANGE":
+          type = "username";
+          break;
+        case "VERIFY_PHONE_CHANGE":
+          type = "phone";
+          break;
+        default:
+          type = "";
+          verificationLink = "";
+          break;
+      }
+
+      if (type === "verify_email" || type === "reset_password") {
+        verificationLink = process.env.FRONT_URL.concat(
+          `/verification/${type}/${Buffer.from(verifyDatDto.email).toString("base64")}/${Buffer.from(
+            verifyDatDto.verificationCode
+          ).toString("base64")}`
+        );
+      } else {
+        verificationLink = process.env.FRONT_URL.concat(
+          `/verification/${type}/${Buffer.from(verifyDatDto.verificationCode).toString("base64")}`
+        );
+      }
 
       const mailOptions: MailOptions = {
         from: `"${process.env.SENDER_NAME}" <${process.env.SENDER_EMAIL}>`,
-        to: verifyEmailDto.email,
+        to: verifyDatDto.email,
         subject: i18next.t(`${prefix}email-subject`),
         text: `${i18next.t(`${prefix}email-welcome`)}\n\n${i18next.t(`${prefix}email-guide`)}\n\n${verificationLink}
         \n\n\n${i18next.t(`${prefix}email-credits`)}\n\n www.chatiZZe.com`,
-        html: emailTemplate(verificationLink, verifyEmailDto.mailType)
+        html: emailTemplate(verificationLink, verifyDatDto.mailType)
       };
 
       this.transporter.sendMail(mailOptions, (e, info) => {
         if (e) {
           console.log(e);
         } else {
-          console.log(`Verification email sent to ${verifyEmailDto.email}: ${info.response}`);
+          console.log(`Verification email sent to ${verifyDatDto.email}: ${info.response}`);
           return HttpStatus.OK;
         }
       });
