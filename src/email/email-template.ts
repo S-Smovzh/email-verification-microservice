@@ -141,7 +141,7 @@ export const emailTemplate = (verificationLink, type) => {
                                     width="90"
                                     height="46"
                                     border="0"
-                                    src="LOGO"
+                                    src="https://res.cloudinary.com/gachi322/image/upload/v1628539170/ChatiZZe/logo_tvuvuw.svg"
                                 /></a>
                               </td>
                             </tr>
