@@ -47,7 +47,7 @@ async function bootstrap() {
       retryAttempts: 10
     }
   });
-  
+
   app.listen(() => console.log("Microservice is listening"));
 }
 

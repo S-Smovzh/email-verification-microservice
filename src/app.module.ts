@@ -4,11 +4,7 @@ import { EmailController } from "./email/email.controller";
 import { EmailModule } from "./email/email.module";
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    EmailModule
-  ],
+  imports: [ConfigModule.forRoot(), EmailModule],
   controllers: [EmailController]
 })
-export class AppModule {
-}
+export class AppModule {}

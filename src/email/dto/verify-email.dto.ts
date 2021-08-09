@@ -9,7 +9,7 @@ export class VerifyEmailDto {
   @IsNotEmpty()
   @IsEmail()
   readonly email: string;
-  
+
   @IsDefined()
   @IsNotEmpty()
   @IsString()
