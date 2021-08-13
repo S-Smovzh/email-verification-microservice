@@ -137,7 +137,7 @@ export const emailTemplate = (verificationLink, type) => {
                                 <a href="\`${verificationLink}\`" target="_blank"
                                   ><img
                                     style="display: inline-block; border: 0 !important; outline: none !important"
-                                    alt="Zety"
+                                    alt="Logo"
                                     width="90"
                                     height="46"
                                     border="0"
