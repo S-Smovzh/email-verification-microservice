@@ -51,4 +51,17 @@ async function bootstrap() {
   app.listen(() => console.log("Microservice is listening"));
 }
 
+async function startWeb() {
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: [process.env.FRONT_URL],
+    credentials: true,
+    exposedHeaders: ["Access-Token", "Refresh-Token", "Client-Token", "Country", "Content-Type"],
+    methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"]
+  });
+  
+  await app.listen(process.env.PORT || 3000);
+}
+
+startWeb();
 bootstrap();
