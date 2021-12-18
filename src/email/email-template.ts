@@ -1,6 +1,6 @@
 export const emailTemplate = (verificationLink, type) => {
-  let mainTdBlock: string = "",
-    linkText: string = "";
+  let mainTdBlock = "",
+    linkText = "";
   switch (type) {
     case "VERIFY_EMAIL":
       linkText = "Verify email";

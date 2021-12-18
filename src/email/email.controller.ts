@@ -8,12 +8,6 @@ import { EmailService } from "./email.service";
 @Controller()
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
-
-  // @MessagePattern({ cmd: "invoke" }, Transport.REDIS)
-  // async invoke(): Promise<void> {
-  //   console.log("email-ver-service invoked");
-  // }
-
   @MessagePattern({ cmd: "verify" }, Transport.REDIS)
   async validateEmail(@Payload() verifyEmailDto: VerifyDataDto) {
     return await this.emailService.validateEmail(verifyEmailDto);
@@ -23,7 +17,7 @@ export class EmailController {
   async refreshPasswordEmail(@Payload() verifyEmailDto: VerifyDataDto) {
     return await this.emailService.validateEmail(verifyEmailDto);
   }
-  
+
   @Get("/")
   @HttpCode(HttpStatus.OK)
   async invoke(): Promise<void> {

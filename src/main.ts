@@ -3,41 +3,6 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import "reflect-metadata";
 
-// const Backend = require("i18next-fs-backend");
-//
-// async function bootstrap() {
-//   const directory = resolve(process.cwd(), "dist/locales");
-//
-//   await i18next.use(Backend).init(
-//     {
-//       // initImmediate: false,
-//       // debug:true,
-//       lng: "en",
-//       fallbackLng: "en",
-//       preload: readdirSync(directory).filter((fileName) => {
-//         const joinedPath = join(directory, fileName);
-//         return lstatSync(joinedPath).isDirectory();
-//       }),
-//       backend: {
-//         loadPath: join(__dirname, "/locales/{{lng}}.json")
-//       }
-//     },
-//     (e) => {
-//       if (e) {
-//         return console.error(e);
-//       }
-//     }
-//   );
-//
-//   const app = await NestFactory.create(AppModule);
-//   app.use(i18next);
-//
-//   await app.listen(process.env.PORT || 7000);
-// }
-//
-// bootstrap();
-//
-
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.REDIS,
@@ -59,8 +24,8 @@ async function startWeb() {
     exposedHeaders: ["Access-Token", "Refresh-Token", "Client-Token", "Country", "Content-Type"],
     methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"]
   });
-  
-  await app.listen(process.env.PORT || 3000);
+
+  await app.listen(process.env.PORT || 3100);
 }
 
 startWeb();
