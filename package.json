@@ -22,11 +22,11 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "^7.6.17",
+    "@nestjs/common": "^7.6.18",
     "@nestjs/config": "^0.6.3",
-    "@nestjs/core": "^7.6.17",
-    "@nestjs/microservices": "^8.0.1",
-    "@nestjs/platform-express": "^7.6.17",
+    "@nestjs/core": "^7.6.18",
+    "@nestjs/microservices": "^7.6.18",
+    "@nestjs/platform-express": "^7.6.18",
     "class-validator": "^0.13.1",
     "i18next": "^20.3.2",
     "i18next-fs-backend": "^1.1.1",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@nestjs/schematics": "^7.3.1",
-    "@nestjs/testing": "^7.6.17",
+    "@nestjs/testing": "^7.6.18",
     "@types/express": "^4.17.12",
     "@types/jest": "^26.0.23",
     "@types/node": "^14.17.3",
