@@ -1,13 +1,12 @@
 import { ConfigService } from "@nestjs/config";
-import { HttpStatus, Injectable } from "@nestjs/common";
-import { RpcException } from "@nestjs/microservices";
+import { HttpStatus, Injectable, InternalServerErrorException } from "@nestjs/common";
 import i18next from "i18next";
 import { createTransport, Transporter } from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { GLOBAL_ERROR_CODES, GlobalErrorCodesEnum } from "@ssmovzh/chatterly-common-utils";
 import { EmailTypeEnum, LoggerService, MailConfigInterface, MailOptionsInterface } from "~/modules/common";
 import { VerifyDataDto } from "./dto/verify-data.dto";
-import { emailTemplate } from "./email-template";
+import { emailTemplate } from "./email.template";
 
 @Injectable()
 export class EmailService {
@@ -99,7 +98,7 @@ export class EmailService {
     } catch (error) {
       this.logger.error(error, error.trace);
       const { httpCode, msg } = GLOBAL_ERROR_CODES.get(GlobalErrorCodesEnum.INTERNAL_SERVER_ERROR);
-      throw new RpcException({
+      throw new InternalServerErrorException({
         key: GlobalErrorCodesEnum.INTERNAL_SERVER_ERROR,
         code: httpCode,
         message: msg
