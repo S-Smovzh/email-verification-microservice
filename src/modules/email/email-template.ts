@@ -1,8 +1,10 @@
-export const emailTemplate = (verificationLink, type) => {
+import { EmailTypeEnum } from "~/modules/common";
+
+export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => {
   let mainTdBlock = "",
-    linkText = "";
+    linkText = "Verify change";
   switch (type) {
-    case "VERIFY_EMAIL":
+    case EmailTypeEnum.VERIFY_EMAIL:
       linkText = "Verify email";
       mainTdBlock = `
           Hi,<br />
@@ -17,7 +19,7 @@ export const emailTemplate = (verificationLink, type) => {
           <br />
       `;
       break;
-    case "RESET_PASSWORD":
+    case EmailTypeEnum.RESET_PASSWORD:
       linkText = "Reset password";
       mainTdBlock = `
           Hi,<br />
@@ -32,8 +34,7 @@ export const emailTemplate = (verificationLink, type) => {
           ><br />
       `;
       break;
-    case "VERIFY_EMAIL_CHANGE":
-      linkText = "Verify change";
+    case EmailTypeEnum.VERIFY_EMAIL_CHANGE:
       mainTdBlock = `
           Hi,<br />
           <br />
@@ -47,8 +48,7 @@ export const emailTemplate = (verificationLink, type) => {
           ><br />
       `;
       break;
-    case "VERIFY_USERNAME_CHANGE":
-      linkText = "Verify change";
+    case EmailTypeEnum.VERIFY_USERNAME_CHANGE:
       mainTdBlock = `
           Hi,<br />
           <br />
@@ -62,23 +62,21 @@ export const emailTemplate = (verificationLink, type) => {
           ><br />
       `;
       break;
-    case "VERIFY_PHONE_CHANGE":
-      linkText = "Verify change";
+    case EmailTypeEnum.VERIFY_TEL_CHANGE:
       mainTdBlock = `
           Hi,<br />
           <br />
-          We received a request for the mobile phone number change.<br />
+          We received a request for the phone number change.<br />
           <br />
-          To verify your new mobile phone number follow the link below.<br />
+          To verify your new phone number follow the link below.<br />
           <br />
           Hurry up! Your activation link expires in 6 hours!<br />
           <br />
-          <strong style="font-weight: 700">If you haven't requested mobile phone number change, DO NOT follow the link and <a href="https://chatizze.herokuapp.com/en/contact-us">contact us</a>!</strong
+          <strong style="font-weight: 700">If you haven't requested phone number change, DO NOT follow the link and <a href="https://chatizze.herokuapp.com/en/contact-us">contact us</a>!</strong
           ><br />
       `;
       break;
-    case "VERIFY_PASSWORD_CHANGE":
-      linkText = "Verify change";
+    case EmailTypeEnum.VERIFY_PASSWORD_CHANGE:
       mainTdBlock = `
           Hi,<br />
           <br />

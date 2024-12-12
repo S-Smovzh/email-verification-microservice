@@ -1,4 +1,4 @@
-export interface MailOptions {
+export interface MailOptionsInterface {
   from: string;
   to: string;
   subject: string;

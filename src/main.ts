@@ -1,32 +1,33 @@
-import { MicroserviceOptions, Transport } from "@nestjs/microservices";
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
 import "reflect-metadata";
+import { NestFactory } from "@nestjs/core";
+import { ConfigService } from "@nestjs/config";
+import { LoggerService } from "~/modules/common";
+import { AppModule } from "./app.module";
 
-async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.REDIS,
-    options: {
-      url: `redis://${process.env.REDIS_DB_NAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_ENDPOINT}:${process.env.REDIS_PORT}`,
-      retryDelay: 3000,
-      retryAttempts: 10
-    }
-  });
-
-  app.listen(() => console.log("Microservice is listening"));
-}
-
-async function startWeb() {
+(async () => {
   const app = await NestFactory.create(AppModule);
+  const logger = await app.resolve(LoggerService); // Use resolve() for transient scoped providers
+  const configService = app.get(ConfigService);
+
+  app.useLogger(logger);
+
   app.enableCors({
     origin: [process.env.FRONT_URL],
     credentials: true,
-    exposedHeaders: ["Access-Token", "Refresh-Token", "Client-Token", "Country", "Content-Type"],
-    methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"]
+    exposedHeaders: ["X-Access-Token", "X-Refresh-Token", "X-Client-Token", "X-Country", "Content-Type"],
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"]
   });
 
-  await app.listen(process.env.PORT || 3100);
-}
+  process.on("uncaughtException", (err) => {
+    logger.error(`Uncaught Exception: ${err.message}`);
+  });
 
-startWeb();
-bootstrap();
+  process.on("unhandledRejection", (reason) => {
+    logger.error(`Unhandled Rejection: ${reason}`);
+  });
+
+  const port = configService.get<number>("app.port");
+  await app.listen(port);
+
+  logger.log(`Service started and listening on port ${port}`);
+})();
