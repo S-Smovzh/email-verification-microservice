@@ -16,7 +16,7 @@ export class Handlers {
     const handlerFunction = this.handlers.get(action);
 
     if (!handlerFunction) {
-      throw new Error("Unknown email type.");
+      throw new Error("Unknown queue type.");
     }
 
     return handlerFunction;
