@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { AuthDataInterface } from "@ssmovzh/chatterly-common-utils/dist/interfaces";
 import { LoggerService } from "~/modules/common";
-import { Handlers } from "~/modules/rabbit/handlers";
+import { Handlers } from "~/modules/email/handlers";
 
 @Injectable()
 export class Executor {

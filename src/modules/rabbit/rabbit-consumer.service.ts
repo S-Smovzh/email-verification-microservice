@@ -4,24 +4,25 @@ import { Channel, connect, ConsumeMessage, Message } from "amqplib";
 import { from, Subject, Subscription } from "rxjs";
 import { mergeMap } from "rxjs/operators";
 import { LoggerService } from "~/modules/common";
-import { RabbitConfigInterface, RabbitQueuesEnum } from "@ssmovzh/chatterly-common-utils";
-import { Executor } from "~/modules/rabbit/executor";
+import { RabbitConfigInterface } from "@ssmovzh/chatterly-common-utils";
+import { Executor } from "~/modules/email/executor";
 
 @Injectable()
 export class RabbitConsumerService implements OnModuleInit, OnModuleDestroy {
   protected subscription: Subscription;
   private readonly rabbitConfig: RabbitConfigInterface;
   private readonly messageQueue = new Subject<Message>();
-  private readonly concurrency = 10;
-  private readonly verifyQueue: string = RabbitQueuesEnum.VERIFY_SIGN_UP;
-  private readonly resetPasswordQueue: string = RabbitQueuesEnum.RESET_PASSWORD;
+  private readonly concurrency = 100;
+  private readonly queueName: string;
 
   constructor(
     @Inject("RABBITMQ_CHANNEL") private channel: Channel,
-    private readonly jobExecutor: Executor,
+    private readonly executor: Executor,
     private readonly logger: LoggerService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
+    @Inject("RABBITMQ_QUEUE_NAME") queueName: string
   ) {
+    this.queueName = queueName;
     this.logger.setContext(RabbitConsumerService.name);
     this.rabbitConfig = configService.get<RabbitConfigInterface>("rabbitConfig");
 
@@ -118,7 +119,7 @@ export class RabbitConsumerService implements OnModuleInit, OnModuleDestroy {
   protected async _processMessageLogic(messageContent: string): Promise<void> {
     this.logger.debug(`_processMessageLogic: queue -> ${this.queueName}, Message -> ${messageContent}.`);
 
-    await this.jobExecutor.handleMessage(messageContent);
+    await this.executor.handleMessage(messageContent);
   }
 
   protected async _recreateChannel(): Promise<void> {

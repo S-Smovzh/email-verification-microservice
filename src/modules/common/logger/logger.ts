@@ -29,6 +29,10 @@ export class LoggerService extends ConsoleLogger {
     super.verbose(this._addUniqueIdToMessage(message));
   }
 
+  clone(): LoggerService {
+    return new LoggerService();
+  }
+
   private _addUniqueIdToMessage(message: string): string {
     return this.uniqueId ? `[Request ID: ${this.uniqueId}] ${message}` : message;
   }

@@ -1,5 +1,5 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsUUID } from "class-validator";
-import { EmailTypeEnum } from "~/modules/enums";
+import { EmailTypeEnum } from "~/modules/common";
 
 export class VerifyDataDto {
   @IsNotEmpty()
