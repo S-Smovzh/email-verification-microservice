@@ -3,8 +3,8 @@ import { HttpStatus, Injectable, InternalServerErrorException } from "@nestjs/co
 import i18next from "i18next";
 import { createTransport, Transporter } from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
-import { GLOBAL_ERROR_CODES, GlobalErrorCodesEnum } from "@ssmovzh/chatterly-common-utils";
-import { EmailTypeEnum, LoggerService, MailConfigInterface, MailOptionsInterface } from "~/modules/common";
+import { GLOBAL_ERROR_CODES, GlobalErrorCodesEnum, LoggerService } from "@ssmovzh/chatterly-common-utils";
+import { EmailTypeEnum, MailConfigInterface, MailOptionsInterface } from "~/modules/common";
 import { VerifyDataDto } from "./dto/verify-data.dto";
 import { emailTemplate } from "./email.template";
 

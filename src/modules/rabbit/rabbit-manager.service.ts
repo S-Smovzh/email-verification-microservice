@@ -1,8 +1,7 @@
 import { Inject, Injectable, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
 import { Channel } from "amqplib";
 import { ConfigService } from "@nestjs/config";
-import { RabbitQueuesEnum } from "@ssmovzh/chatterly-common-utils";
-import { LoggerService } from "~/modules/common";
+import { LoggerService, RabbitQueuesEnum } from "@ssmovzh/chatterly-common-utils";
 import { RabbitConsumerService } from "~/modules/rabbit/rabbit-consumer.service";
 import { Executor } from "~/modules/email/executor";
 
