@@ -1,4 +1,4 @@
-import { EmailTypeEnum } from "~/modules/common";
+import { EmailTypeEnum } from "@ssmovzh/chatterly-common-utils";
 
 export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => {
   let mainTdBlock = "",

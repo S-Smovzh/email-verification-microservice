@@ -1,5 +1,5 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsUUID } from "class-validator";
-import { EmailTypeEnum } from "~/modules/common";
+import { EmailTypeEnum } from "@ssmovzh/chatterly-common-utils";
 
 export class VerifyDataDto {
   @IsNotEmpty()
