@@ -9,7 +9,7 @@ export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => 
       mainTdBlock = `
           Hi,<br />
           <br />
-          We are very pleased that you want to try ChatiZZe.<br />
+          We are very pleased that you want to try Chatterly.<br />
           <br />
           The last thing you need to do is verify your email.<br />
           <br />
@@ -44,7 +44,7 @@ export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => 
           <br />
           Hurry up! Your activation link expires in 6 hours!<br />
           <br />
-          <strong style="font-weight: 700">If you haven't requested email change, DO NOT follow the link and <a href="https://chatizze.herokuapp.com/en/contact-us">contact us</a>!</strong
+          <strong style="font-weight: 700">If you haven't requested email change, DO NOT follow the link and <a href="https://Chatterly.herokuapp.com/en/contact-us">contact us</a>!</strong
           ><br />
       `;
       break;
@@ -58,7 +58,7 @@ export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => 
           <br />y
           Hurry up! Your activation link expires in 6 hours!<br />
           <br />
-          <strong style="font-weight: 700">If you haven't requested username change, DO NOT follow the link and <a href="https://chatizze.herokuapp.com/en/contact-us">contact us</a>!</strong
+          <strong style="font-weight: 700">If you haven't requested username change, DO NOT follow the link and <a href="https://Chatterly.herokuapp.com/en/contact-us">contact us</a>!</strong
           ><br />
       `;
       break;
@@ -72,7 +72,7 @@ export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => 
           <br />
           Hurry up! Your activation link expires in 6 hours!<br />
           <br />
-          <strong style="font-weight: 700">If you haven't requested phone number change, DO NOT follow the link and <a href="https://chatizze.herokuapp.com/en/contact-us">contact us</a>!</strong
+          <strong style="font-weight: 700">If you haven't requested phone number change, DO NOT follow the link and <a href="https://Chatterly.herokuapp.com/en/contact-us">contact us</a>!</strong
           ><br />
       `;
       break;
@@ -86,7 +86,7 @@ export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => 
           <br />
           Hurry up! Your activation link expires in 6 hours!<br />
           <br />
-          <strong style="font-weight: 700">If you haven't requested password change, DO NOT follow the link and <a href="https://chatizze.herokuapp.com/en/contact-us">contact us</a>!</strong
+          <strong style="font-weight: 700">If you haven't requested password change, DO NOT follow the link and <a href="https://Chatterly.herokuapp.com/en/contact-us">contact us</a>!</strong
           ><br />
       `;
       break;
@@ -139,7 +139,7 @@ export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => 
                                     width="90"
                                     height="46"
                                     border="0"
-                                    src="https://res.cloudinary.com/gachi322/image/upload/v1628539170/ChatiZZe/logo_tvuvuw.svg"
+                                    src="https://res.cloudinary.com/gachi322/image/upload/v1628539170/Chatterly/logo_tvuvuw.svg"
                                 /></a>
                               </td>
                             </tr>
@@ -284,7 +284,7 @@ export const emailTemplate = (verificationLink: string, type: EmailTypeEnum) => 
                                           font-family: Arial, Helvetica, sans-serif;
                                         "
                                       >
-                                        This message was produced and distributed by ChatiZZe LLC, Bohdan Khmelnytsky street 17/52а , Kiyv 01030
+                                        This message was produced and distributed by Chatterly LLC, Bohdan Khmelnytsky street 17/52а , Kiyv 01030
                                       </td>
                                     </tr>
                                     <tr>

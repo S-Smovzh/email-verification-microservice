@@ -7,7 +7,7 @@ export class Handlers {
   private handlers = new Map<RabbitQueuesEnum, any>();
 
   constructor(private readonly emailService: EmailService) {
-    this.handlers.set(RabbitQueuesEnum.VERIFY_SIGN_UP, this.emailService.validateEmail.bind(this.emailService));
+    this.handlers.set(RabbitQueuesEnum.VERIFY_EMAIL, this.emailService.validateEmail.bind(this.emailService));
     this.handlers.set(RabbitQueuesEnum.VERIFY_PASSWORD_RESET, this.emailService.validateEmail.bind(this.emailService));
     this.handlers.set(RabbitQueuesEnum.VERIFY_ACCOUNT_UPDATE, this.emailService.validateEmail.bind(this.emailService));
   }

@@ -1,6 +1,7 @@
 import * as process from "process";
 import * as dotenv from "dotenv";
 import { AppConfigInterface, RabbitConfigInterface } from "@ssmovzh/chatterly-common-utils";
+import { MailConfigInterface } from "~/modules/common";
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ export default () => ({
     password: process.env.MAIL_PASSWORD,
     senderName: process.env.SENDER_NAME,
     senderEmail: process.env.SENDER_EMAIL
-  },
+  } as MailConfigInterface,
   rabbitConfig: {
     protocol: "amqp",
     hostname: process.env.RABBIT_HOST,

@@ -4,9 +4,9 @@ import { RabbitConfigInterface } from "@ssmovzh/chatterly-common-utils";
 import * as amqp from "amqplib";
 import { RabbitConsumerManagerService } from "~/modules/rabbit/rabbit-manager.service";
 import { EmailModule } from "~/modules/email/email.module";
+import { RabbitService } from "~/modules/rabbit/rabbit.service";
 
 const RABBITMQ_CONNECTION = "RABBITMQ_CONNECTION";
-const RABBITMQ_CHANNEL = "RABBITMQ_CHANNEL";
 
 const rabbitMQProviders: Provider[] = [
   {
@@ -16,19 +16,12 @@ const rabbitMQProviders: Provider[] = [
       return await amqp.connect(rabbitmqConfig);
     },
     inject: [ConfigService]
-  },
-  {
-    provide: RABBITMQ_CHANNEL,
-    useFactory: async (connection: amqp.Connection) => {
-      return await connection.createChannel();
-    },
-    inject: [RABBITMQ_CONNECTION]
   }
 ];
 
 @Global()
 @Module({
   imports: [ConfigModule, EmailModule],
-  providers: [...rabbitMQProviders, RabbitConsumerManagerService]
+  providers: [...rabbitMQProviders, RabbitConsumerManagerService, RabbitService]
 })
 export class RabbitModule {}

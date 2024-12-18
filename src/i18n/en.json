@@ -1,8 +1,8 @@
 {
   "internal-failure": "Internal Error!",
   "email-subject": "Account verification",
-  "email-text-welcome": "Welcome to Bakely!",
+  "email-text-welcome": "Welcome to Chatterly!",
   "email-guide": "To activate your account copy and paste the link below in your browser.",
   "email-hurry-up": "Hurry up! Your activation link expires in 24 hours!",
-  "email-credits": "This message was produced and distributed by Bakely LLC, Bohdan Khmelnytsky street 17/52а , Kiyv 01030"
+  "email-credits": "This message was produced and distributed by Chatterly LLC, Bohdan Khmelnytsky street 17/52а , Kiyv 01030"
 }

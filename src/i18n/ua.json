@@ -1,0 +1,7 @@
+{
+  "internal-failure": "Internal Error!",
+  "email-subject": "Account verification",
+  "email-text-welcome": "Welcome to Chatterly!",
+  "email-hurry-up": "Hurry up! Your activation link expires in 24 hours!",
+  "email-credits": "This message was produced and distributed by Chatterly LLC, Bohdan Khmelnytsky street 17/52а , Kiyv 01030"
+}
